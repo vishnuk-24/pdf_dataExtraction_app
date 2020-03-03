@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+</head>
+
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    <center>PDF Data extraction</center>
+                </h1>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                {{ form.as_p }}
+                            </div>
+                            <div class="control">
+                                <button type="submit" class="button is-info">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+
+                {% if data_list %}
+                    <div style="text-align: center;"><h3>Extracted Data</h3>
+                    <table><br>
+
+                        {% for data in data_list %}
+                            <td><br>
+                                Name of Attorney: <p>{{ data.name }}</p><br>
+                                Title of Program: <p>{{ data.title }}</p><br>
+                                Date of Attendance: <p>{{ data.date }}</p><br>
+                                Provider Organization: <p>{{ data.organization }}</p><br>
+                            </td>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    </footer>
+</body>
+
+</html>
