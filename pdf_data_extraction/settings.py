@@ -27,7 +27,7 @@ SECRET_KEY = 'e#147048s@c((+1tf#urdj!d&pm*bqx)kelu8$_r25@sk#!j*j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'https://pdf-data-extraction-heroku.herokuapp.com/']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'pdf-data-extraction-heroku.herokuapp.com']
 
 
 # Application definition
