@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
 </head>
 
@@ -42,24 +43,143 @@
     </section>
     <section class="section">
         <div class="container">
-            <div class="columns">
 
-                {% if data_list %}
-                    <div style="text-align: center;"><h3>Extracted Data</h3>
-                    <table><br>
+            {% if data_list %}
+            <div style="text-align: left;"><h2><strong>Extracted Data</strong></h2></div>
+                {% for data in data_list %}
+            <table>
+                <tr>
+                    <td>
+                        <h3> Name of Attorney : </h3>
+                    </td>
+                    <td>
+                        {{ data.name }}
+                    </td>
+                </tr>
+                   <tr>
+                    <td>
+                        <h3> Title of Program : </h3>
+                    </td>
+                    <td>
+                        {{ data.title }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3> Date of Attendance : </h3>
+                    </td>
+                    <td>
+                       {{ data.date }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p></p><br>
+                    </td>
+                </tr>
 
-                        {% for data in data_list %}
-                            <td><br>
-                                Name of Attorney: <p>{{ data.name }}</p><br>
-                                Title of Program: <p>{{ data.title }}</p><br>
-                                Date of Attendance: <p>{{ data.date }}</p><br>
-                                Provider Organization: <p>{{ data.organization }}</p><br>
-                            </td>
-                        {% endfor %}
-                    </table>
-                {% endif %}
+                <tr>
+                    <td>
+                        <h3><u>Credit for Attendance</u></h3>
+                    </td>
+                </tr>
 
-            </div>
+                <tr>
+                    <td>
+                        <h3> Ethics and Professionalism : </h3>
+                    </td>
+                    <td>
+                       {{ data.attendance_ethics_and_professionalism }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3> Skills : </h3>
+                    </td>
+                    <td>
+                       {{ data.attendance_skills }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3> Areas of Professional Practice : </h3>
+                    </td>
+                    <td>
+                       {{ data.attendance_area_of_professional_practice }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3> Law Practice Management : </h3>
+                    </td>
+                    <td>
+                       {{ data.attendance_law_practice_management }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p></p><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3><u>Credit for Faculty Participation</u></h3>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <h3> Ethics and Professionalism : </h3>
+                    </td>
+                    <td>
+                       {{ data.faculty_ethics_and_professionalism }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3> Skills : </h3>
+                    </td>
+                    <td>
+                       {{ data.faculty_skills }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3> Areas of Professional Practice : </h3>
+                    </td>
+                    <td>
+                       {{ data.faculty_area_of_professional_practice }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3> Law Practice Management : </h3>
+                    </td>
+                    <td>
+                       {{ data.faculty_law_practice_management }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p></p><br>
+                    </td>
+                </tr>
+                    <tr>
+                    <td>
+                        <h3> Provider Organization :</h3>
+                    </td>
+                    <td>
+                       {{ data.organization }}
+                    </td>
+                    </tr>
+            </table>
+                {% endfor %}
+            {% endif %}
+            {% if error %}
+                <p>{{ error }}</p>
+            {% endif %}
         </div>
     </section>
     <footer class="footer">

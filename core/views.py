@@ -8,8 +8,7 @@ from django.views import View
 from .models import FileUpload
 
 from .forms import FileUploadForm
-from .dataProcessing_utils import get_attributes_from_textfile_process1, \
-    get_attributes_from_textfile_process2, get_attributes_from_textfile_process3
+from .dataProcessing_utils import Get_attribute
 from .extraction_utils import extract_text_from_pdf
 
 
@@ -31,22 +30,28 @@ class IndexView(View):
                 file_object = FileUpload(file=file, filename=file_name)
                 file_object.save()
                 file_path = os.path.join(settings.BASE_DIR, file_object.file.path)
-                print('file_path', file_path)
-                self.text_file = extract_text_from_pdf(file_path)
-                datas = get_attributes_from_textfile_process1(self.text_file)
-                if not datas:
-                    datas = get_attributes_from_textfile_process2(self.text_file)
-            except Exception as e:
-                print('Error', e)
-                # return render(request, self.template_name, {"form": form, "error": "PDF ERROR"})
-                try:
-                    datas = get_attributes_from_textfile_process2(self.text_file)
-                except Exception as e:
-                    print('Error', e)
-                    datas = get_attributes_from_textfile_process3(self.text_file)
-            if datas:
-                data_list = []
-                data_list.append(datas)
-                return render(request, self.template_name, {"data_list": data_list, "form": form})
 
-# path = os.path.abspath(request.FILES['pdf'].file.name)
+                data_list = []
+                text_file = extract_text_from_pdf(file_path)
+                get_obj = Get_attribute(text_file)
+                datas1 = get_obj.process1()
+
+                if datas1.get('data_process'):
+                    print('Hallo bhai, ', datas1.get('data_process'))
+                    data_list.append(datas1.get('data'))
+                    return render(request, self.template_name, {"data_list": data_list, "form": form})
+
+                datas2 = get_obj.process2()
+                if datas2.get('data_process'):
+                    data_list.append(datas2.get('data'))
+                    return render(request, self.template_name, {"data_list": data_list, "form": form})
+
+                datas3 = get_obj.process3()
+                if datas3.get('data_process'):
+                    data_list.append(datas3.get('data'))
+                    return render(request, self.template_name, {"data_list": data_list, "form": form})
+                else:
+                    return render(request, self.template_name, {"form": form, "error": "PDF ERROR"})
+            except Exception as e:
+                print('<><><><><><><><>')
+                print('Error', e)
